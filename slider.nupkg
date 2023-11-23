@@ -1,0 +1,37 @@
+using Jellyfin.Plugin;
+
+namespace MyPlugin
+{
+    public class MyPlugin : IPlugin
+    {
+        public void Initialize()
+        {
+            // Adicione um novo item de menu ao menu principal
+            var menu = PluginManager.Current.MainMenu;
+            menu.AddMenuItem("My Plugin", "/myplugin");
+        }
+
+        public IEnumerable<SliderItem> GetSliderItems()
+        {
+            // Obtenha uma lista dos filmes mais recentes
+            var movies = MediaLibrary.GetMediaItems(new MediaQuery { Type = MediaItemType.Movie, Order = MediaSort.DateAdded, Direction = SortOrder.Descending });
+
+            // Crie uma lista de objetos SliderItem
+            var items = new List<SliderItem>();
+            foreach (var movie in movies)
+            {
+                var item = new SliderItem
+                {
+                    Title = movie.Title,
+                    Image = movie.CoverImage.Path,
+                    URL = movie.Uri
+                };
+
+                items.Add(item);
+            }
+
+            // Retorne a lista de objetos SliderItem
+            return items;
+        }
+    }
+}
