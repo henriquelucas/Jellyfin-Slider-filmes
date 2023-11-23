@@ -1,0 +1,8 @@
+{
+    "id": "com.mycompany.myplugin",
+    "version": "1.0.0",
+    "name": "My Plugin",
+    "description": "Adiciona um slider com filmes na tela inicial",
+    "icon": "icon.png",
+    "categories": ["Media", "Plugins"]
+}
